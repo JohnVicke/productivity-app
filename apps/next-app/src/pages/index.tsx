@@ -1,14 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 import { Button } from 'ui'
-import { CoolInterface } from 'server/src/lib/CoolInterface'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const coolKid: CoolInterface = {
-  amICool: false,
-}
-
-console.log(coolKid)
 
 const Home = () => (
   <div className="flex min-h-screen flex-col items-center justify-center py-2">

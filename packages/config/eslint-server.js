@@ -32,6 +32,12 @@ module.exports = {
     },
   },
   rules: {
+    'import/extensions': [
+      'error',
+      {
+        js: 'ignorePackages',
+      },
+    ],
     'import/prefer-default-export': 'off',
   },
   overrides: [
