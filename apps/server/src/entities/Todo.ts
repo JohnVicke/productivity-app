@@ -4,15 +4,17 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  BaseEntity,
 } from 'typeorm';
+import { ITodo } from '../lib/ITodo';
 
 @Entity()
-export class Workout {
+export class Todo extends BaseEntity implements ITodo {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  title: string;
 
   @CreateDateColumn()
   createdAt = new Date();

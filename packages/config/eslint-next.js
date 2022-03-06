@@ -35,7 +35,7 @@ module.exports = {
         namedComponents: 'arrow-function',
       },
     ],
-
+    'react/prop-types': 0,
     // next
     '@next/next/no-html-link-for-pages': ['error', './src/pages'],
     'react/jsx-props-no-spreading': 'off',

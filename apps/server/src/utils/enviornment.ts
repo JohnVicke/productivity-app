@@ -1,6 +1,9 @@
 import { config } from 'dotenv-safe';
+import path from 'path';
 
 export type Enivornment = 'test' | 'development' | 'production';
+
+const getRootDir = () => path.resolve(__dirname, '..', '..', '..', '..', '..');
 
 export const getEnviornment = (): Enivornment => {
   switch (process.env.NODE_ENV) {
@@ -21,12 +24,13 @@ export const getEnviornment = (): Enivornment => {
 export const loadEnviornment = (): boolean => {
   const enviornment = getEnviornment();
 
-  const path = enviornment === 'test' ? '.env.test' : '.env';
+  const envPath = enviornment === 'test' ? '.env.test' : '.env';
+  const rootDir = getRootDir();
 
   const configOutput = config({
-    example: `${process.env.INIT_CWD}/.env.example`,
-    path: `${process.env.INIT_CWD}/${path}`,
-    allowEmptyValues: true,
+    example: `${rootDir}/.env.example`,
+    path: `${rootDir}/${envPath}`,
+    allowEmptyValues: false,
   });
 
   if (configOutput.error) {

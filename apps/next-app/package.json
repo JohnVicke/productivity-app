@@ -10,16 +10,27 @@
     "lint": "eslint src --fix"
   },
   "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@mui/icons-material": "^5.4.4",
+    "@mui/material": "^5.4.4",
+    "@mui/styled-engine-sc": "^5.0.0-rc.1",
+    "dotenv": "^16.0.0",
     "next": "latest",
+    "next-transpile-modules": "^9.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.34.16",
     "server": "*",
+    "styled-components": "^5.3.3",
     "ui": "*"
   },
   "devDependencies": {
     "@types/node": "^17.0.15",
     "@types/react": "^17.0.39",
+    "@types/react-query": "^1.2.9",
+    "@types/styled-components": "^5.1.23",
     "autoprefixer": "^10.4.0",
+    "babel-plugin-styled-components": "^2.0.6",
     "config": "*",
     "eslint": "^8.8.0",
     "next-transpile-modules": "^9.0.0",

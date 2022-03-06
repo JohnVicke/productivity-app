@@ -15,7 +15,7 @@
     "prepare": "husky install",
     "db:up": "docker-compose --env-file .env -f auxiliary/postgres/docker-compose.yml up -d",
     "db:down": "docker-compose -f auxiliary/postgres/docker-compose.yml down",
-    "redis:up": "docker-compose -f auxiliary/redis/docker-compose.yml up -d",
+    "redis:up": "docker-compose --env-file .env -f auxiliary/redis/docker-compose.yml up -d",
     "redis:down": "docker-compose -f auxiliary/redis/docker-compose.yml down"
   },
   "devDependencies": {

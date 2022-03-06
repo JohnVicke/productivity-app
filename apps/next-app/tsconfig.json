@@ -3,7 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "noEmit": true,
-    "module": "esnext"
+    "module": "esnext",
+    "paths": {
+      "@mui/styled-engine": ["./node_modules/@mui/styled-engine"]
+    }
   },
   "include": ["next-env.d.ts", "src/**/*", "styles/globals.css"],
   "exclude": ["node_modules", ".next", ".turbo"]
