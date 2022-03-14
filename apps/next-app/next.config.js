@@ -1,3 +1,5 @@
+const { i18n } = require('./next-i18next.config')
+
 const withTM = require('next-transpile-modules')([
   'ui',
   '@mui/material',
@@ -18,6 +20,7 @@ Object.keys(process.env).forEach((key) => {
 module.exports = withTM({
   reactStrictMode: true,
   env,
+  i18n,
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

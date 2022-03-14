@@ -38,9 +38,11 @@ module.exports = {
     'react/prop-types': 0,
     // next
     '@next/next/no-html-link-for-pages': ['error', './src/pages'],
+    'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
     'import/prefer-default-export': 'off',
     'react/jsx-uses-react': 1,
+    semi: [2, 'always'],
   },
   overrides: [
     {

@@ -2,13 +2,14 @@ import cors from 'cors';
 import express, { Application, Response } from 'express';
 import session from 'express-session';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import { Connection } from 'typeorm';
 import {
   deserializeUser,
   getGoogleLogin,
   getGoogleRegister,
-  getGoogleStrategy,
+  getJwtStrategy,
   serializeUser,
 } from './passport';
 import { createApiRouter, createAuthRouter } from './routers';
@@ -48,7 +49,7 @@ export class Server {
 
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-
+    this.app.use(cookieParser());
     this.app.use(
       session({
         name: process.env.COOKIE_NAME,
@@ -71,7 +72,7 @@ export class Server {
   }
 
   private configurePassport(config: AuthConfig) {
-    passport.use(getGoogleStrategy(config, '/auth/google/register/callback'));
+    passport.use('token', getJwtStrategy());
     passport.use('google-register', getGoogleRegister(config));
     passport.use('google-login', getGoogleLogin(config));
     passport.serializeUser(serializeUser);

@@ -1,4 +1,4 @@
-import { Request, RequestHandler, Response, Router } from 'express';
+import { RequestHandler, Router } from 'express';
 import passport from 'passport';
 
 export class GoogleAuthController {
@@ -16,9 +16,9 @@ export class GoogleAuthController {
 
   private addRoutes() {
     this.router.get('/register', this.authenticate());
-    this.router.get('/register/callback', this.callback);
+    this.router.get('/register/callback', this.callback('google'));
     this.router.get('/login', this.authenticate());
-    this.router.get('/login/callback', this.callback);
+    this.router.get('/login/callback', this.callback('google'));
     this.router.use('*', (_, res) => res.sendStatus(404));
   }
 
@@ -27,9 +27,16 @@ export class GoogleAuthController {
       scope: ['email', 'openid', 'profile'],
     });
 
-  private callback = (req: Request, res: Response) => {
-    passport.authenticate('google', { failWithError: true });
-    const redirectPath = 'http://localhost:3000/registration-complete';
-    res.redirect(`${redirectPath}`);
+  private callback = (provider: string) => {
+    const authenticator = passport.authenticate(provider, {
+      failWithError: true,
+    });
+
+    const successHandler: RequestHandler = async (req: any, res) => {
+      const redirectPath = 'http://localhost:3000/registration-complete';
+      return res.redirect(`${redirectPath}`);
+    };
+
+    return [authenticator, successHandler];
   };
 }

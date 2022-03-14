@@ -6,11 +6,15 @@ import {
   UpdateDateColumn,
   BaseEntity,
 } from 'typeorm';
+import { IUser } from '../lib/IUser';
 
 @Entity()
-export class User extends BaseEntity {
+export class User extends BaseEntity implements IUser {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ nullable: true })
+  googleId?: string;
 
   @Column()
   firstName: string;

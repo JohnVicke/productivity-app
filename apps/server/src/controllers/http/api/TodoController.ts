@@ -29,10 +29,11 @@ export class TodoController {
     this.router.use('*', (_, res) => res.sendStatus(404));
   }
 
-  private getTodos = async (_: Request, res: Response) => {
+  private getTodos = async (req: Request, res: Response) => {
+    console.log(req.user);
     try {
       const todos = await Todo.find();
-      res.send(todos);
+      res.json(todos);
     } catch (error) {
       res.sendStatus(500).send(error);
     }

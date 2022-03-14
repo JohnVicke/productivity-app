@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
-
 import { Button } from '@mui/material'
 import Head from 'next/head'
 import Link from 'next/link'
-
+import React from 'react'
 import { useTodos } from '../../hooks/useTodos'
 
 const Todos = () => {
-  const [readerError] = useState(false)
   const { data } = useTodos()
 
   return (
@@ -17,7 +14,6 @@ const Todos = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <p>{readerError && 'hello'}</p>
         {data?.map((todo) => (
           <Link
             href="/todos/[id]"

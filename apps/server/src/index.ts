@@ -8,6 +8,8 @@ const main = async () => {
   const auth: AuthConfig = {
     googleClientID: process.env.GOOGLE_CLIENT_ID as string,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    slackClientID: process.env.SLACK_CLIENT_ID as string,
+    slackClientSecret: process.env.SLACK_CLIENT_SECRET as string,
   };
   const server = new Server({ auth });
   server.start();

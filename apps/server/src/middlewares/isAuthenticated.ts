@@ -1,13 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 
-export const isAuthenticated = (
+export const isAuthenticated: RequestHandler = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   if (!req.isAuthenticated()) {
-    return next();
+    console.log('[AUTH] user is not authenticated');
+    return res.sendStatus(401);
   }
 
-  return res.redirect('/login');
+  return next();
 };
