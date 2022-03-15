@@ -4,35 +4,15 @@ import '../../styles/globals.css';
 import Head from 'next/head';
 import theme from 'styles/theme';
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import { QueryClientProvider, QueryClient } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { useRouter } from 'next/router';
-import { HttpError } from 'src/utils/HttpError';
 import { appWithTranslation } from 'next-i18next';
+import { getQueryClient } from 'src/lib/queryClient';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
-  const [queryClient] = useState(
-    new QueryClient({
-      defaultOptions: {
-        queries: {
-          refetchOnWindowFocus: false,
-          refetchOnMount: false,
-          retry: (errorCount: number, error: any | HttpError) => {
-            if (errorCount > 3) {
-              return false;
-            }
-            if (error?.custom?.status === 401) {
-              // Open login modal using context or simple error bus
-              router.replace('/login');
-              return false;
-            }
-            return true;
-          },
-        },
-      },
-    })
-  );
+  const [queryClient] = useState(getQueryClient(router));
   return (
     <>
       <Head>

@@ -4,7 +4,6 @@ import {
   ThemeOptions,
 } from '@mui/material/styles';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
-import { ThemeConsumer } from 'styled-components';
 
 const ubuntuDefault = {
   fontFamily: ['Ubuntu', 'sans-serif'].join(','),
@@ -21,6 +20,7 @@ const palette: PaletteOptions = {
   primary: {
     main: '#4FD1C5',
     dark: '#171923',
+    light: 'rgba(57, 178, 172, .2)',
   },
   secondary: {
     main: '#F687B3',
@@ -41,6 +41,11 @@ const typography: TypographyOptions = {
   h3: {
     ...montserratDefault,
   },
+
+  h4: {
+    ...montserratDefault,
+  },
+
   body1: {
     ...ubuntuDefault,
   },

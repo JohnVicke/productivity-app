@@ -37,12 +37,7 @@ export const LandingPage: NextPage<LandingPageProps> = () => {
           minHeight="1000px"
           spacing={4}
         >
-          <Grid
-            item
-            style={{ textAlign: `${showRightPanel ? 'left' : 'center'}` }}
-            md={7}
-            lg={6}
-          >
+          <Grid item style={{ textAlign: 'left' }} md={7} lg={6}>
             <Typography variant="h3">{t('header.title')}</Typography>
             <Typography variant="body1" sx={{ marginY: 2 }}>
               {t('header.body')}

@@ -1,6 +1,7 @@
+import { keys } from '@mui/system';
 import { Request, RequestHandler, Response, Router } from 'express';
-import passport from 'passport';
 import { User } from '../../../entities/User';
+import { isAuthenticated } from '../../../middlewares/isAuthenticated';
 import { assertUserId } from '../../../utils/assertUserId';
 
 export class UserController {
@@ -17,27 +18,44 @@ export class UserController {
   };
 
   private addRoutes() {
-    this.router.get('/me', this.me());
+    this.router.get('/me', this.me);
+    this.router.get('/third-party-integrations', this.thirdPartyIntegrations);
   }
 
-  private me = () => {
-    const authenticator = passport.authenticate('token', {
-      session: false,
-      failWithError: true,
-    });
+  private thirdPartyIntegrations = async (req: Request, res: Response) => {
+    try {
+      assertUserId(req);
 
-    const successHandler = async (req: Request, res: Response) => {
-      try {
-        assertUserId(req);
-        const user = await User.findOne({
-          where: { id: req.user.id },
-          select: ['firstName', 'lastName'],
-        });
-        res.json(user);
-      } catch (error) {
-        res.sendStatus(500).send(error);
+      const user = await User.findOne({
+        where: { id: req.user.id },
+        select: ['googleId'],
+      });
+
+      if (!user) {
+        return res.send(500);
       }
-    };
-    return [authenticator, successHandler];
+
+      const ids = ['googleId'];
+
+      // @ts-ignore-next-line
+      const verifiedIntegrations = ids.map(id => ({ [id]: !!user[id] }));
+
+      res.json(verifiedIntegrations);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  };
+
+  private me = async (req: Request, res: Response) => {
+    try {
+      assertUserId(req);
+      const user = await User.findOne({
+        where: { id: req.user.id },
+        select: ['firstName', 'lastName'],
+      });
+      res.json(user);
+    } catch (error) {
+      res.status(500).send(error);
+    }
   };
 }

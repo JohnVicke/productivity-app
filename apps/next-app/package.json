@@ -24,7 +24,8 @@
     "react-query": "^3.34.16",
     "server": "*",
     "styled-components": "^5.3.3",
-    "ui": "*"
+    "ui": "*",
+    "zustand": "^3.7.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.15",

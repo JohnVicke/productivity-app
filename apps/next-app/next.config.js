@@ -1,20 +1,20 @@
-const { i18n } = require('./next-i18next.config')
+const { i18n } = require('./next-i18next.config');
 
 const withTM = require('next-transpile-modules')([
   'ui',
   '@mui/material',
   '@mui/system',
-])
+]);
 
-const dotenv = require('dotenv')
-dotenv.config({ path: '../../.env' })
+const dotenv = require('dotenv');
+dotenv.config({ path: '../../.env' });
 
-const env = {}
+const env = {};
 Object.keys(process.env).forEach((key) => {
   if (key.startsWith('NEXT_PUBLIC_')) {
-    env[key] = process.env[key]
+    env[key] = process.env[key];
   }
-})
+});
 
 /** @type {import('next').NextConfig} */
 module.exports = withTM({
@@ -25,7 +25,7 @@ module.exports = withTM({
     config.resolve.alias = {
       ...config.resolve.alias,
       '@mui/styled-engine': '@mui/styled-engine-sc',
-    }
-    return config
+    };
+    return config;
   },
-})
+});
