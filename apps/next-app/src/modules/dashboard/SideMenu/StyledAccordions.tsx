@@ -22,6 +22,7 @@ export const StyledAccordionSummary = styled(AccordionSummary)<
   backgroundColor: `${
     active ? theme.palette.primary.light : theme.palette.background.default
   }`,
+  margin: '5px 0',
   transition: '.2s ease-out',
   '&:hover': {
     backgroundColor: theme.palette.primary.light,

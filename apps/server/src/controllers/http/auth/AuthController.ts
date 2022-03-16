@@ -4,7 +4,12 @@ import jwt from 'jsonwebtoken';
 import { isAuthenticated } from '../../../middlewares/isAuthenticated';
 import { assertUserId } from '../../../utils/assertUserId';
 
-const GOOGLE_SCOPE = ['email', 'openid', 'profile'];
+const GOOGLE_SCOPE = [
+  'email',
+  'openid',
+  'profile',
+  'https://www.googleapis.com/auth/gmail.readonly',
+];
 const GOOGLE_PROMPT_SELECT_ACCOUNT = 'select_account';
 
 export class AuthController {
@@ -59,7 +64,8 @@ export class AuthController {
     });
 
     const successHandler: RequestHandler = async (req, res) => {
-      const redirectPath = 'http://localhost:3000/registration-complete';
+      const { accessToken } = req.user;
+      const redirectPath = `http://localhost:3000/registration-complete?accessToken=${accessToken}`;
       return res.redirect(redirectPath);
     };
 

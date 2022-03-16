@@ -1,15 +1,15 @@
-import React from 'react';
 import {
   Box,
+  BoxProps,
   Container,
   Grid,
   styled,
   Typography,
   useMediaQuery,
-  BoxProps,
 } from '@mui/material';
 import { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
+import React from 'react';
 import { LinkButton } from 'src/components/LinkButton';
 import { TopNav } from '../nav/TopNav';
 

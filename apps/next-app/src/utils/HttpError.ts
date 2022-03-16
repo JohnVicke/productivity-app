@@ -3,6 +3,6 @@ export class HttpError extends Error {
     params: string,
     public custom: { status: number; redirect?: string }
   ) {
-    super(params)
+    super(params);
   }
 }

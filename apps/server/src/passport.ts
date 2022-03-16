@@ -8,10 +8,16 @@ import { User } from './entities/User';
 import { ThirdPartyId } from './types';
 import { SerializedUser } from './types/SerializedUser';
 
+type UserWithToken = {
+  user?: User;
+  accessToken?: string;
+};
+
 type VerifyCallback = (
   profile: any,
   id: ThirdPartyId,
-  done: (error: any, user?: User) => void,
+  done: (error: any, user?: UserWithToken) => void,
+  accessToken?: string,
 ) => void;
 
 const getUserFromThirdPartyId = (id: ThirdPartyId) => {
@@ -24,7 +30,8 @@ const getUserFromThirdPartyId = (id: ThirdPartyId) => {
 const verifyThirdPartyLogin = async (
   _: Profile,
   id: ThirdPartyId,
-  done: (error: any, user?: User) => void,
+  done: (error: any, user?: UserWithToken) => void,
+  accessToken?: string,
 ) => {
   try {
     const user = await getUserFromThirdPartyId(id);
@@ -33,7 +40,7 @@ const verifyThirdPartyLogin = async (
       return done(new Error('did not find a user'), user);
     }
 
-    return done(null, user);
+    return done(null, { user, accessToken });
   } catch (error) {
     return done(error);
   }
@@ -78,11 +85,11 @@ export const verifyThirdPartyRegistration = async (
 };
 
 export const serializeUser = async (
-  user: Express.User,
+  expressUser: Express.User,
   done: (err: any, user?: SerializedUser) => void,
 ) => {
-  const sessionUser = user as User;
-  done(null, { id: sessionUser.id });
+  const user = (expressUser as UserWithToken).user as User;
+  done(null, { id: user.id });
 };
 
 export const deserializeUser = async (
@@ -113,11 +120,11 @@ const getGoogleStrategy = (
       callbackURL,
     },
     async (
-      _accessToken: string,
+      accessToken: string,
       _refreshToken: string,
       profile: Profile,
-      done: (err: any, user?: SerializedUser) => void,
-    ) => verify(profile, { googleId: profile.id }, done),
+      done: (err: any, user?: UserWithToken) => void,
+    ) => verify(profile, { googleId: profile.id }, done, accessToken),
   );
 };
 

@@ -1,3 +1,3 @@
-import { Dashboard } from 'src/modules/dashboard/Dashboard';
+import { DashboardPage } from 'src/modules/dashboard/DashboardPage';
 
-export default Dashboard;
+export default DashboardPage;
