@@ -1,6 +1,6 @@
 export interface ITodo {
-  id: number;
+  id?: number;
   title: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

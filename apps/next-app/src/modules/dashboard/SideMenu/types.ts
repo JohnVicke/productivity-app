@@ -10,5 +10,8 @@ export type SubItem = {
 };
 
 export type ISideMenuItem = {
-  [key: string]: IBaseMenuItem['key'] & { subItems?: SubItem[] };
+  [key: string]: IBaseMenuItem['key'] & {
+    subItems?: SubItem[];
+    icon?: JSX.Element;
+  };
 };

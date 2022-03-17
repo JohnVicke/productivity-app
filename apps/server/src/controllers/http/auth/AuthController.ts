@@ -64,8 +64,7 @@ export class AuthController {
     });
 
     const successHandler: RequestHandler = async (req, res) => {
-      const { accessToken } = req.user;
-      const redirectPath = `http://localhost:3000/registration-complete?accessToken=${accessToken}`;
+      const redirectPath = `http://localhost:3000/registration-complete`;
       return res.redirect(redirectPath);
     };
 

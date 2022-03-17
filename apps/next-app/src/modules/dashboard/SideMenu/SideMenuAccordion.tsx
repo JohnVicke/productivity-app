@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ExpandMore } from '@mui/icons-material';
-import { styled, Typography, TypographyProps } from '@mui/material';
+import { Box, styled, Typography, TypographyProps } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -23,19 +23,23 @@ const HoverableText = styled(Typography)<
   },
 }));
 
-interface SideMenuItemProps {
+const deconstructSideMenuItem = (item: ISideMenuItem) => {
+  const key = Object.keys(item)[0];
+  return { ...item[key], key };
+};
+
+interface SideMenuAccordionProps {
   menuItem: ISideMenuItem;
   activeAccordionKey?: string;
   activeAccordionItemKey?: string;
 }
 
-export const SideMenuItem: React.FC<SideMenuItemProps> = ({
+export const SideMenuAccordion: React.FC<SideMenuAccordionProps> = ({
   activeAccordionKey,
   activeAccordionItemKey,
   menuItem,
 }) => {
-  const key = Object.keys(menuItem)[0];
-  const { title, href, subItems } = menuItem[key];
+  const { title, href, subItems, key } = deconstructSideMenuItem(menuItem);
 
   const [open, setOpen] = useState(activeAccordionKey === key || !subItems);
   const router = useRouter();
@@ -55,9 +59,11 @@ export const SideMenuItem: React.FC<SideMenuItemProps> = ({
         onClick={onClick}
         expandIcon={subItems?.length ? <ExpandMore /> : <ArrowLeft />}
       >
-        <Typography variant="body1" sx={{ fontWeight: 700 }}>
-          {title}
-        </Typography>
+        <Box display="flex" alignItems="center">
+          <Typography variant="body1" sx={{ fontWeight: 700 }}>
+            {title}
+          </Typography>
+        </Box>
       </StyledAccordionSummary>
       <StyledAccordionDetails>
         {subItems?.map((item) => {

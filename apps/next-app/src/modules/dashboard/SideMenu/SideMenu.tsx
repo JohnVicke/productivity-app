@@ -1,6 +1,7 @@
-import { Box } from '@mui/material';
+import { Inbox } from '@mui/icons-material';
+import { Box, Divider } from '@mui/material';
 import React from 'react';
-import { SideMenuItem } from './SideMenuItem';
+import { SideMenuAccordion } from './SideMenuAccordion';
 import { ISideMenuItem, SubItem } from './types';
 
 const installation: SubItem = {
@@ -24,7 +25,24 @@ const integrations: ISideMenuItem = {
   },
 };
 
-const sideMenuItems: ISideMenuItem[] = [gettingStarted, integrations];
+const bottomItems: ISideMenuItem[] = [gettingStarted, integrations];
+
+const inbox: ISideMenuItem = {
+  inbox: {
+    title: 'Inbox',
+    href: 'dashboard/inbox',
+    icon: <Inbox width={30} height={30} />,
+  },
+};
+
+const today: ISideMenuItem = {
+  inbox: {
+    title: 'Today',
+    href: 'dashboard/today',
+  },
+};
+
+const topItems: ISideMenuItem[] = [inbox, today];
 
 interface SideMenuProps {
   activeAccordionKey?: string;
@@ -33,9 +51,15 @@ interface SideMenuProps {
 
 export const SideMenu: React.FC<SideMenuProps> = ({ children, ...props }) => (
   <Box paddingTop={10}>
-    {sideMenuItems.map((m) => (
-      <Box key={Object.keys(m)[0]}>
-        <SideMenuItem menuItem={m} {...props} />
+    {topItems.map((item) => (
+      <Box key={Object.keys(item)[0]}>
+        <SideMenuAccordion menuItem={item} {...props} />
+      </Box>
+    ))}
+    <Divider sx={{ my: 2 }} />
+    {bottomItems.map((item) => (
+      <Box key={Object.keys(item)[0]}>
+        <SideMenuAccordion menuItem={item} {...props} />
       </Box>
     ))}
   </Box>
