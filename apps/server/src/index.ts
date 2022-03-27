@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { Server } from './server';
 import { AuthConfig } from './types/AuthConfig';
 import { loadEnviornment } from './utils/enviornment';
+import { logger } from './utils/logger';
 
 const main = async () => {
   loadEnviornment();
@@ -15,4 +16,4 @@ const main = async () => {
   server.start();
 };
 
-main().catch(err => console.error(`[ERROR]: ${err.message}`));
+main().catch(err => logger.error(err));

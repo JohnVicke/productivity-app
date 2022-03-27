@@ -1,22 +1,23 @@
 import cors from 'cors';
+import passport from 'passport';
 import express, { Application, Response } from 'express';
 import session from 'express-session';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import passport from 'passport';
 import { Connection } from 'typeorm';
 import {
-  deserializeUser,
+  deserialize,
+  serialize,
   getGoogleLogin,
   getGoogleRegister,
   getJwtStrategy,
-  serializeUser,
-} from './passport';
+} from './lib/passport';
 import { createApiRouter, createAuthRouter } from './routers';
 import { AuthConfig } from './types/AuthConfig';
 import { IS_PROD } from './utils/constants';
 import { createConnection } from './utils/createConnection';
 import { createRedisStore } from './utils/createRedisStore';
+import { logger } from './utils/logger';
 
 interface ServerConfig {
   auth: AuthConfig;
@@ -75,8 +76,8 @@ export class Server {
     passport.use('token', getJwtStrategy());
     passport.use('google-register', getGoogleRegister(config));
     passport.use('google-login', getGoogleLogin(config));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    passport.serializeUser(serialize);
+    passport.deserializeUser(deserialize);
   }
 
   private async connectDatabase() {
@@ -102,7 +103,7 @@ export class Server {
 
   public start() {
     this.app.listen(this.app.get('port'), () => {
-      console.log(`Server is listening on port ${this.app.get('port')}`);
+      logger.info(`Server is listening on port ${this.app.get('port')}`);
     });
   }
 }

@@ -1,6 +1,7 @@
 import { createConnection as _createConnection } from 'typeorm';
 import { Todo } from '../entities/Todo';
 import { User } from '../entities/User';
+import { IS_PROD } from './constants';
 
 export const createConnection = async () =>
   _createConnection({
@@ -13,4 +14,5 @@ export const createConnection = async () =>
     entities: [User, Todo],
     migrations: ['src/migrations/**/*.js'],
     synchronize: true,
+    logging: !IS_PROD,
   });

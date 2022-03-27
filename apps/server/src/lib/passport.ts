@@ -1,12 +1,13 @@
+/* eslint-disable */
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 import argon from 'argon2';
 import { Profile } from 'passport';
 import jwt from 'jsonwebtoken';
-import { AuthConfig } from './types/AuthConfig';
-import { User } from './entities/User';
-import { ThirdPartyId } from './types';
-import { SerializedUser } from './types/SerializedUser';
+import { AuthConfig } from '../types/AuthConfig';
+import { User } from '../entities/User';
+import { ThirdPartyId } from '../types';
+import { SerializedUser } from '../types/SerializedUser';
 
 type UserWithToken = {
   user?: User;
@@ -14,7 +15,7 @@ type UserWithToken = {
 };
 
 type VerifyCallback = (
-  profile: any,
+  profile: Profile,
   id: ThirdPartyId,
   done: (error: any, user?: UserWithToken) => void,
   accessToken?: string,
@@ -30,7 +31,7 @@ const getUserFromThirdPartyId = (id: ThirdPartyId) => {
 const verifyThirdPartyLogin = async (
   _: Profile,
   id: ThirdPartyId,
-  done: (error: any, user?: UserWithToken) => void,
+  done: (error: unknown, user?: UserWithToken) => void,
   accessToken?: string,
 ) => {
   try {
@@ -84,7 +85,7 @@ export const verifyThirdPartyRegistration = async (
   }
 };
 
-export const serializeUser = async (
+export const serialize = async (
   expressUser: Express.User,
   done: (err: any, user?: SerializedUser) => void,
 ) => {
@@ -92,7 +93,7 @@ export const serializeUser = async (
   done(null, { id: user.id });
 };
 
-export const deserializeUser = async (
+export const deserialize = async (
   user: SerializedUser,
   done: (err: any, user?: User | null) => void,
 ) => {

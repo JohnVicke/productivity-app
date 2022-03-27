@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from 'react-query';
-import { ITodo } from 'server/src/lib/ITodo';
+import { ITodo } from 'server/src/types/ITodo';
 import { Api } from '../lib/api';
 
 const fetchWorkout = (id: number) => Api.get(`api/todos/${id}`);

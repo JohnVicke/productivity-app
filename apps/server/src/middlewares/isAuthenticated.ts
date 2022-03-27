@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
+import { logger } from '../utils/logger';
 
 export const isAuthenticated: RequestHandler = (
   req: Request,
@@ -6,7 +7,7 @@ export const isAuthenticated: RequestHandler = (
   next: NextFunction,
 ) => {
   if (!req.isAuthenticated()) {
-    console.log('[AUTH] user is not authenticated');
+    logger.info('[AUTH] user is not authenticated');
     return res.sendStatus(401);
   }
 

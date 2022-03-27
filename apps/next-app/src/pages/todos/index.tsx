@@ -1,11 +1,11 @@
-import { Button } from '@mui/material'
-import Head from 'next/head'
-import Link from 'next/link'
-import React from 'react'
-import { useTodos } from '../../hooks/useTodos'
+import { Button } from '@mui/material';
+import Head from 'next/head';
+import Link from 'next/link';
+import React from 'react';
+import { useTodos } from '../../hooks/useTodos';
 
 const Todos = () => {
-  const { data } = useTodos()
+  const { data } = useTodos();
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
@@ -26,7 +26,7 @@ const Todos = () => {
         ))}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Todos
+export default Todos;

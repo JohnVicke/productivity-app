@@ -5,8 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  OneToMany,
 } from 'typeorm';
-import { IUser } from '../lib/IUser';
+import { IUser } from '../types/IUser';
+import { Todo } from './Todo';
 
 @Entity()
 export class User extends BaseEntity implements IUser {
@@ -24,6 +26,12 @@ export class User extends BaseEntity implements IUser {
 
   @Column()
   email: string;
+
+  /* Start relations */
+  @OneToMany(() => Todo, todo => todo.user)
+  todos?: Todo[];
+
+  /* End relations */
 
   @CreateDateColumn()
   createdAt = new Date();

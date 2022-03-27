@@ -6,10 +6,10 @@ type LeftPanelProps = {
 
 type RightPanelProps = LeftPanelProps & {};
 
-export const LeftPanel: React.FC<LeftPanelProps> = ({ children }) => {
-  return <>{children}</>;
-};
+export const LeftPanel: React.FC<LeftPanelProps> = ({ children }) => (
+  <h1>{children}</h1>
+);
 
-export const RightPanel: React.FC<RightPanelProps> = ({ children }) => {
-  return <>{children}</>;
-};
+export const RightPanel: React.FC<RightPanelProps> = ({ children }) => (
+  <h1>{children}</h1>
+);

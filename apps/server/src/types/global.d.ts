@@ -1,10 +1,11 @@
+/* eslint-disable */
 import express, { Request } from 'express';
 import { SerializedUser } from '.';
 import { Enivornment } from '../utils/enviornment';
 
 declare global {
   namespace Express {
-    interface User extends SerializedUser {}
+    type User = SerializedUser;
   }
 
   namespace NodeJS {

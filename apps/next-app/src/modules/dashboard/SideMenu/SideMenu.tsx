@@ -7,7 +7,7 @@ import { ISideMenuItem, SubItem } from './types';
 const installation: SubItem = {
   installation: {
     title: 'Installation',
-    href: 'getting-started/installation',
+    href: '/dashboard/getting-started/installation',
   },
 };
 
@@ -21,7 +21,7 @@ const gettingStarted: ISideMenuItem = {
 const integrations: ISideMenuItem = {
   integrations: {
     title: 'Integrations',
-    href: 'dashboard/integrations',
+    href: '/dashboard/integrations',
   },
 };
 
@@ -30,15 +30,15 @@ const bottomItems: ISideMenuItem[] = [gettingStarted, integrations];
 const inbox: ISideMenuItem = {
   inbox: {
     title: 'Inbox',
-    href: 'dashboard/inbox',
+    href: '/dashboard/inbox',
     icon: <Inbox width={30} height={30} />,
   },
 };
 
 const today: ISideMenuItem = {
-  inbox: {
+  today: {
     title: 'Today',
-    href: 'dashboard/today',
+    href: '/dashboard/today',
   },
 };
 

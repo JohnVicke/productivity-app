@@ -7,11 +7,9 @@ const accessTokenKey = '@pdol/token';
 
 const getDefaultValues = () => {
   if (!isServer) {
-    try {
-      return {
-        accessToken: localStorage.getItem(accessTokenKey) || '',
-      };
-    } catch {}
+    return {
+      accessToken: localStorage.getItem(accessTokenKey) || '',
+    };
   }
   return {
     accessToken: '',
@@ -21,10 +19,7 @@ const getDefaultValues = () => {
 export const useTokenStore = create(
   combine(getDefaultValues(), (set) => ({
     setTokens: (x: { accessToken: string }) => {
-      try {
-        console.log('setting token in store', x.accessToken);
-        localStorage.setItem(accessTokenKey, x.accessToken);
-      } catch {}
+      localStorage.setItem(accessTokenKey, x.accessToken);
       set(x);
     },
   }))

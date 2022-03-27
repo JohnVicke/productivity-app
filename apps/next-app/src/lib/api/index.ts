@@ -30,7 +30,7 @@ export class Api {
     throw new Error('Netowrk error not ok');
   }
 
-  static async post(url: string, body: any) {
+  static async post(url: string, body: Object) {
     const data = await fetch(getUrl(url), {
       method: 'POST',
       ...getOptions(),

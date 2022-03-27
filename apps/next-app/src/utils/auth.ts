@@ -22,5 +22,6 @@ export const loginWithGoogle = () => {
 };
 
 export const logout = async () => {
-  const test = await Api.get('auth/logout');
+  const res = await Api.get('auth/logout');
+  return res.json();
 };

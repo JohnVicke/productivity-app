@@ -8,7 +8,10 @@ import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { useRouter } from 'next/router';
 import { appWithTranslation } from 'next-i18next';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { getQueryClient } from 'src/lib/queryClient';
+import { ToastController } from 'src/modules/toast/ToastController';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -22,13 +25,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           name="viewport"
         />
       </Head>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </QueryClientProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <ToastController />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </QueryClientProvider>
+      </LocalizationProvider>
     </>
   );
 };

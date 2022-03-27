@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ArrowRight } from '@mui/icons-material';
 import { styled, Paper, PaperProps, Box, Typography } from '@mui/material';
 
-interface ContinueWithButtonProps {
+interface IntegrateWithButtonProps {
   text: string;
   image: {
     path: string;
@@ -23,7 +23,7 @@ const IntegrationPaper = styled(Paper)<PaperProps>(() => ({
   },
 }));
 
-export const ContinueWithButton: React.FC<ContinueWithButtonProps> = ({
+export const IntegrateWithButton: React.FC<IntegrateWithButtonProps> = ({
   text,
   image,
 }) => (
@@ -33,7 +33,7 @@ export const ContinueWithButton: React.FC<ContinueWithButtonProps> = ({
         <Image src={image.path} alt={image.alt} width="30" height="30" />
         <Typography
           sx={{ marginLeft: 2 }}
-        >{`Continue with ${text}`}</Typography>
+        >{`Integrate with ${text}`}</Typography>
       </Box>
       <ArrowRight />
     </Box>

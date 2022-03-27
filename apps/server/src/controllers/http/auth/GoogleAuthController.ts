@@ -1,4 +1,4 @@
-import { RequestHandler, Router } from 'express';
+import { RequestHandler, Response, Router } from 'express';
 import passport from 'passport';
 
 export class GoogleAuthController {
@@ -32,7 +32,7 @@ export class GoogleAuthController {
       failWithError: true,
     });
 
-    const successHandler: RequestHandler = async (req: any, res) => {
+    const successHandler: RequestHandler = async (_, res: Response) => {
       const redirectPath = 'http://localhost:3000/registration-complete';
       return res.redirect(`${redirectPath}`);
     };

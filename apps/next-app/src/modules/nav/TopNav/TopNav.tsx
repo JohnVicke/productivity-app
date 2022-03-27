@@ -11,8 +11,8 @@ import {
 import { Dashboard, School, Work, AccountCircle } from '@mui/icons-material';
 import Link from 'next/link';
 import { useMe } from 'src/hooks/useMe';
-import { TopNavItem } from './TopNavItem';
 import { useScreenType } from 'src/hooks/useScreenType';
+import { TopNavItem } from './TopNavItem';
 
 const navItems = [
   {

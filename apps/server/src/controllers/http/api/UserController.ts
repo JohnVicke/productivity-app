@@ -1,7 +1,5 @@
-import { keys } from '@mui/system';
 import { Request, RequestHandler, Response, Router } from 'express';
 import { User } from '../../../entities/User';
-import { isAuthenticated } from '../../../middlewares/isAuthenticated';
 import { assertUserId } from '../../../utils/assertUserId';
 
 export class UserController {
@@ -37,12 +35,13 @@ export class UserController {
 
       const ids = ['googleId'];
 
-      // @ts-ignore-next-line
-      const verifiedIntegrations = ids.map(id => ({ [id]: !!user[id] }));
+      const verifiedIntegrations = ids.map(id => ({
+        [id]: !!user[id as 'googleId'],
+      }));
 
-      res.json(verifiedIntegrations);
+      return res.json(verifiedIntegrations);
     } catch (error) {
-      res.status(500).send(error);
+      return res.status(500).send(error);
     }
   };
 
