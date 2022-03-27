@@ -12,7 +12,11 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "db:up": "docker-compose --env-file .env -f auxiliary/postgres/docker-compose.yml up -d",
+    "db:down": "docker-compose -f auxiliary/postgres/docker-compose.yml down",
+    "redis:up": "docker-compose --env-file .env -f auxiliary/redis/docker-compose.yml up -d",
+    "redis:down": "docker-compose -f auxiliary/redis/docker-compose.yml down"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.2",

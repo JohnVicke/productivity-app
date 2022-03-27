@@ -32,7 +32,17 @@ module.exports = {
     },
   },
   rules: {
+    'import/extensions': [
+      'error',
+      {
+        js: 'ignorePackages',
+      },
+    ],
     'import/prefer-default-export': 'off',
+    'import/no-cycle': 'off',
+    'lines-between-class-members': 'off',
+    '@typescript-eslint/lines-between-class-members': 'off',
+    'class-methods-use-this': 'off',
   },
   overrides: [
     {

@@ -6,6 +6,8 @@
     "target": "ES6",
     "noEmit": false,
     "module": "commonjs",
-    "sourceMap": true
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   }
 }

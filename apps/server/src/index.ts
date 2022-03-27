@@ -1,13 +1,19 @@
-import express from 'express';
+import 'reflect-metadata';
+import { Server } from './server';
+import { AuthConfig } from './types/AuthConfig';
+import { loadEnviornment } from './utils/enviornment';
+import { logger } from './utils/logger';
 
-const app = express();
+const main = async () => {
+  loadEnviornment();
+  const auth: AuthConfig = {
+    googleClientID: process.env.GOOGLE_CLIENT_ID as string,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    slackClientID: process.env.SLACK_CLIENT_ID as string,
+    slackClientSecret: process.env.SLACK_CLIENT_SECRET as string,
+  };
+  const server = new Server({ auth });
+  server.start();
+};
 
-const port = 4000;
-
-app.get('/', (_req, res) => {
-  res.send('hello world!');
-});
-
-app.listen(port, () => {
-  console.log(`Server started on port http://localhost:${port}`);
-});
+main().catch(err => logger.error(err));
